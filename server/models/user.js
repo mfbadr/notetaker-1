@@ -24,6 +24,17 @@ User.register = function(obj, cb){
   });
 };
 
+User.login = function(obj, cb){
+  pg.query('select * from users where username = $1 limit 1', [obj.username], function(err, results){
+    if(err || !results.rowCount){return cb();}
+    var isAuth = bcrypt.compareSync(obj.password, results.rows[0].password);
+    if(!isAuth){return cb();}
+    var user = results.rows[0];
+    delete user.password;
+    cb(user);
+  });
+};
+
 function randomUrl(url, cb){
   var ext  = path.extname(url);
 
