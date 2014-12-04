@@ -14,7 +14,7 @@ module.exports = {
     }
   },
   handler: function(request, reply){
-    Note.create(request.payload, function(err, note){
+    Note.create(request.auth.credentials, request.payload, function(err, note){
       reply();
     });
   }
