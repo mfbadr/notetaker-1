@@ -8,7 +8,7 @@
 
     if($state.current.name === 'listNotes'){
       Note.list().then(function(response){
-        debugger;
+        $scope.notes = response.data;
       });
     }
 

@@ -11,7 +11,9 @@ module.exports = {
     },
     handler: function(request, reply){
         Note.list(request.auth.credentials.id, function(err, notes){
-           reply();
+           if(!err){reply(notes).code(200);
+           }else{reply().code(400);
+           }
         });
     }
 };
