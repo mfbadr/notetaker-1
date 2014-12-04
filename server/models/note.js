@@ -12,4 +12,12 @@ Note.create = function(user, obj, cb){
   });
 };
 
+Note.list = function(userID, cb){
+  pg.query('select notes.title, notes.created_at from notes inner join users on notes.user_id=users.id where notes.user_id=' + userID + ';', [], function(err, results){
+    console.log(err, results);
+    cb(err, results.rows);
+  });
+
+};
+
 module.exports = Note;
