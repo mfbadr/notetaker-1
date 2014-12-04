@@ -4,6 +4,8 @@
   angular.module('hapi-auth')
   .controller('NotesCtrl', ['$rootScope', '$scope', '$state', 'Note', function($rootScope, $scope, $state, Note){
     $scope.note = {};
+    $scope.mode = $state.current.name;
+
     $scope.create = function(note){
       Note.create(note).then(function(response){
         console.log(response.data);
