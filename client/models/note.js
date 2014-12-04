@@ -8,6 +8,10 @@
       return $http.post('/notes', note);
     }
 
-    return {create:create};
+    function list(){
+      return $http.get('/notes');
+    }
+
+    return {create:create, list:list};
   }]);
 })();
