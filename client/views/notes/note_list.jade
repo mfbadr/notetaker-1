@@ -1,1 +1,12 @@
 h1 {{mode}}
+
+table
+  thead
+    tr
+      th(width='200') Title          
+      th(width='200') Date Created
+      tbody
+        tr(ng-repeat = 'note in notes')
+          td {{note.title}}         
+          td {{note.created_at}}        
+      
