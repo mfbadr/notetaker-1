@@ -17,7 +17,6 @@ Note.list = function(userID, cb){
     console.log(err, results);
     cb(err, results.rows);
   });
-
 };
 
 module.exports = Note;

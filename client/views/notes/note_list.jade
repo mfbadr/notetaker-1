@@ -1,5 +1,4 @@
-h1 {{mode}}
-
+h1 Your Notes
 table
   thead
     tr
@@ -8,5 +7,5 @@ table
       tbody
         tr(ng-repeat = 'note in notes')
           td {{note.title}}         
-          td {{note.created_at}}        
+          td {{note.created_at | date : formate : 'mediumDate'}}
       
