@@ -8,7 +8,7 @@ h1 Notes
           th(width='300') Date Created
           tbody
             tr(ng-repeat = 'note in notes')
-              td {{note.title}}         
+              td: a(href='/#/notes/{{note.id}}') {{note.title}}
               td {{note.created_at | date: medium}}  
   .small-3.columns      
 
