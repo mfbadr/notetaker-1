@@ -1,11 +1,14 @@
-h1 Your Notes
-table
-  thead
-    tr
-      th(width='200') Title          
-      th(width='200') Date Created
-      tbody
-        tr(ng-repeat = 'note in notes')
-          td {{note.title}}         
-          td {{note.created_at | date : formate : 'mediumDate'}}
-      
+h1 Notes
+.row
+  .small-6.small-offset-3.columns
+    table
+      thead
+        tr
+          th(width='300') Title          
+          th(width='300') Date Created
+          tbody
+            tr(ng-repeat = 'note in notes')
+              td {{note.title}}         
+              td {{note.created_at | date: medium}}  
+  .small-3.columns      
+
