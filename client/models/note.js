@@ -9,7 +9,7 @@
     }
 
     function list(){
-      return $http.get('/notes');
+      return $http.get('/notes?limit=10&offset=0');
     }
 
     function findOne(noteId){

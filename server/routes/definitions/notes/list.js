@@ -10,7 +10,7 @@ module.exports = {
         mode: 'required'
     },
     handler: function(request, reply){
-        Note.list(request.auth.credentials.id, function(err, notes){
+        Note.list(request.auth.credentials.id, request.query, function(err, notes){
            if(!err){reply(notes).code(200);
            }else{reply().code(400);
            }

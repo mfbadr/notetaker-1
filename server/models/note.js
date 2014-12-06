@@ -12,7 +12,14 @@ Note.create = function(user, obj, cb){
   });
 };
 
-Note.list = function(userID, cb){
+Note.list = function(userId, query, cb){
+  pg.query('select * from query_notes($1, $2, $3)', [userId, query.limit, query.offset], function(err, results){
+    console.log(err, results);
+    cb(err, results && results.rows ? results.rows : null);
+  });
+
+
+  /*
   pg.query('select notes.title, notes.created_at, notes.id ' +
   'from notes ' +
   'inner join users on notes.user_id=users.id ' +
@@ -20,6 +27,8 @@ Note.list = function(userID, cb){
     console.log(err, results);
     cb(err, results.rows);
   });
+  */
+
 };
 
 Note.findOne = function(noteId, cb){
