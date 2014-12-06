@@ -10,10 +10,14 @@
       $scope.notes = response.data;
     });
 
+    if($scope.mode === 'viewNote'){
+      debugger;
+    }
+
     $scope.create = function(note){
       Note.create(note).then(function(response){
         Note.list().then(function(response){
-          $scope.note = {};
+          $scope.newNote = {};
           $scope.notes = response.data;
         });
       }, function(){
