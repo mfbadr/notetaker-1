@@ -13,11 +13,12 @@
               td {{note.created_at | date: medium}}
               td
                 span.tag(ng-repeat='name in note.tag_names')
-                  a(href='notes?tag={{name}}') {{name}},  
-  .small-4.columns      
+                  a(href='/#/notes?tag={{name}}') {{name}},  
+  .small-4.columns 
     h1 New Note
     input(type='text', placeholder='Title', ng-model='newNote.title')
     textarea(row='20', cols='10', placeholder='Body of Note', ng-model='newNote.body')
     input(type='text', placeholder='Tags', ng-model='newNote.tags')
-    button(ng-click='create(newNote)') Create
+    input(ng-file-select, type='file', name='files', accept="image/*", ng-model='photos', ng-file-model='photos', ng-multiple='true', ng-file-change='fileSelected($files)')
+    button(ng-click='create()') Create
 

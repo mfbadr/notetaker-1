@@ -2,9 +2,14 @@
   'use strict';
 
   angular.module('hapi-auth')
-  .controller('NotesCtrl', ['$rootScope', '$scope', '$state', 'Note', '$stateParams', function($rootScope, $scope, $state, Note, $stateParams){
+  .controller('NotesCtrl', ['$rootScope', '$scope', '$state', 'Note', '$stateParams', '$upload', function($rootScope, $scope, $state, Note, $stateParams, $upload){
     $scope.note = {};
     $scope.mode = $state.current.name;
+    var files;
+
+    $scope.fileSelected = function(f){
+      files = f;
+    };
 
     if($scope.mode !== 'viewNote'){
       Note.list().then(function(response){
@@ -23,8 +28,9 @@
       });
     }
 
-    $scope.create = function(note){
-      Note.create(note).then(function(response){
+    /*
+    $scope.create = function(){
+      Note.create().then(function(response){
         Note.list().then(function(response){
           $scope.newNote = {};
           $scope.notes = response.data;
@@ -33,6 +39,29 @@
         console.log('error');
       });
     };
+    */
 
+    $scope.create = function(){
+      console.log($scope.newNote);
+      $scope.upload = $upload.upload({
+        url: 'notes',
+        method: 'POST',
+        data: $scope.newNote,
+        file: files
+      }).progress(function(evt){
+        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+      }).success(function(data, status, headers, config){
+        console.log('data', data);
+        console.log('status', status);
+        console.log('headers', headers);
+        console.log('config', config);
+
+        Note.list().then(function(response){
+          $scope.newNote = {};
+          $scope.notes = response.data;
+        });
+
+      });
+    };
   }]);
 })();
