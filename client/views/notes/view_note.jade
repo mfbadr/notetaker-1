@@ -1,2 +1,6 @@
-h2 View a Note
-pre {{note | json}}
+h2 {{note.title}}
+h4 Created: {{note.created_at | date : 'medium'}}
+h5 {{note.body}}
+h6 Tags: 
+  span.tag(ng-repeat='name in note.tag_names')
+    a(href='/#/notes?tag={{name}}') {{name}}, 
