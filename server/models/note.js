@@ -22,4 +22,14 @@ Note.list = function(userID, cb){
   });
 };
 
+Note.findOne = function(noteId, cb){
+  console.log('NOTEID IN MODEL', noteId);
+  pg.query('select notes.title, notes.created_at, notes.body ' +
+      'from notes ' +
+      'where notes.id = $1', [noteId], function(err, results){
+        console.log(err, results);
+        cb(err, results.rows);
+      });
+};
+
 module.exports = Note;

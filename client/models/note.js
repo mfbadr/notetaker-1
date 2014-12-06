@@ -12,6 +12,10 @@
       return $http.get('/notes');
     }
 
-    return {create:create, list:list};
+    function findOne(noteId){
+      return $http.get('/notes/' + noteId);
+    }
+
+    return {create:create, list:list, findOne:findOne};
   }]);
 })();
