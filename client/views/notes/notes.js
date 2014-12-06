@@ -6,16 +6,16 @@
     $scope.note = {};
     $scope.mode = $state.current.name;
 
-    if($state.current.name === 'listNotes'){
-      Note.list().then(function(response){
-        $scope.notes = response.data;
-      });
-    }
+    Note.list().then(function(response){
+      $scope.notes = response.data;
+    });
 
     $scope.create = function(note){
       Note.create(note).then(function(response){
-        console.log(response.data);
-        $state.go('listNotes');
+        Note.list().then(function(response){
+          $scope.note = {};
+          $scope.notes = response.data;
+        });
       }, function(){
         console.log('error');
       });
