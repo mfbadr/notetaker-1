@@ -5,6 +5,7 @@
   .controller('NotesCtrl', ['$rootScope', '$scope', '$state', 'Note', '$stateParams', '$upload', function($rootScope, $scope, $state, Note, $stateParams, $upload){
     $scope.note = {};
     $scope.mode = $state.current.name;
+    $scope.count = 0;
     var files;
 
     $scope.fileSelected = function(f){
@@ -31,7 +32,7 @@
     $scope.create = function(note){
       $scope.count = 0;
       Note.create(note).then(function(response){
-        debugger;
+        //debugger;
         $scope.note = {};
         Note.upload(response.data.noteId, $scope.files);
       });
