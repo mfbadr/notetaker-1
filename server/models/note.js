@@ -1,34 +1,19 @@
 'use strict';
 
-var pg = require('../postgres/manager'),
-    AWS = require('aws-sdk'),
-    path = require('path'),
-    async  = require('async'),
-    crypto = require('crypto');
+var pg = require('../postgres/manager');
+    //AWS = require('aws-sdk'),
+    //path = require('path'),
+    //async  = require('async'),
+    //crypto = require('crypto');
 
 function Note(){
 }
 
 Note.create = function(user, obj, cb){
-  console.log('MODEL OBJ', obj);
-  obj.tags = obj.tags.toLowerCase().split(',').map(function(t){return t.trim();});
-
-  async.map(obj.file, makePhotoUrls, function(err, photoUrls){
-    async.map(photoUrls, savePhotosToS3, function(){
-      var urls = photoUrls.map(function(obj){return obj.url;});
-      pg.query('select add_note($1, $2, $3, $4, $5)', [user.id, obj.title, obj.body, obj.tags, urls], function(err, results){
-        console.log(err, results);
-        cb();
-      });
-    });
-  });
-
-  /* OLD CREATE FUNCTION
   pg.query('select add_note($1, $2, $3, $4)', [user.id, obj.title, obj.body, obj.tags], function(err, results){
     console.log(err, results);
-    cb();
+    cb(err, results && results.rows ? results.rows[0].add_note : null);
   });
-  */
 };
 
 Note.list = function(userId, query, cb){
@@ -46,6 +31,7 @@ Note.findOne = function(noteId, cb){
   });
 };
 
+/*
 function savePhotosToS3(photo, cb){
   var s3   = new AWS.S3(),
     params = {Bucket: process.env.AWS_BUCKET, Key: photo.key, Body: photo.body, ACL: 'public-read'};
@@ -62,5 +48,5 @@ function makePhotoUrls(photo, cb){
     cb(null, {key:key, url:url, body:photo._data});
   });
 }
-
+*/
 module.exports = Note;

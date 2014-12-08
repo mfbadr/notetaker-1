@@ -16,6 +16,8 @@
       return $http.get('/notes/' + noteId);
     }
 
-    return {create:create, list:list, findOne:findOne};
+    function upload(noteId, files){}
+
+    return {create:create, list:list, findOne:findOne, upload:upload};
   }]);
 })();

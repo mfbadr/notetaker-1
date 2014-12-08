@@ -28,21 +28,17 @@
       });
     }
 
-    /*
-    $scope.create = function(){
-      Note.create().then(function(response){
-        Note.list().then(function(response){
-          $scope.newNote = {};
-          $scope.notes = response.data;
-        });
-      }, function(){
-        console.log('error');
+    $scope.create = function(note){
+      $scope.count = 0;
+      Note.create(note).then(function(response){
+        debugger;
+        $scope.note = {};
+        Note.upload(response.data.noteId, $scope.files);
       });
     };
-    */
 
+    /* OLD CREATE FUNCTION
     $scope.create = function(){
-      console.log($scope.newNote);
       $scope.upload = $upload.upload({
         url: 'notes',
         method: 'POST',
@@ -60,8 +56,9 @@
           $scope.newNote = {};
           $scope.notes = response.data;
         });
-
       });
     };
+    */
+
   }]);
 })();

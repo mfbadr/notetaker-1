@@ -19,6 +19,9 @@
     input(type='text', placeholder='Title', ng-model='newNote.title')
     textarea(row='20', cols='10', placeholder='Body of Note', ng-model='newNote.body')
     input(type='text', placeholder='Tags', ng-model='newNote.tags')
-    input(ng-file-select, type='file', name='files', accept="image/*", ng-model='photos', ng-file-model='photos', ng-multiple='true', ng-file-change='fileSelected($files)')
-    button(ng-click='create()') Create
+    //input(ng-file-select, type='file', name='files', accept="image/*", ng-model='photos', ng-file-model='photos', ng-multiple='true', ng-file-change='fileSelected($files)')
+    button.small.radius(ng-file-select, ng-model="files", multiple="true") Add Files
+    h5(ng-show='files.length') {{files.length}} files selected
+    br
+    button(ng-click='create(newNote)') Create
 
