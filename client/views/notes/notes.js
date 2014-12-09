@@ -13,7 +13,7 @@
     };
 
     if($scope.mode !== 'viewNote'){
-      Note.list().then(function(response){
+      Note.list($state.params.tag || '%', $state.params.page * 1 || 0).then(function(response){
         $scope.notes = response.data;
       });
     }
@@ -33,14 +33,17 @@
       Note.create(note).then(function(response){
         //debugger;
         $scope.note = {};
-        Note.upload(response.data.noteId, $scope.files);
+        if($scope.files){
+          Note.upload(response.data.noteId, $scope.files);
+        }else{
+          $state.reload();
+        }
       });
     };
 
     $scope.$on('upload', function(e, count){
       $scope.count = count;
       if($scope.count === $scope.files.length){
-        console.log('count trigger');
         $state.reload();
       }
     });

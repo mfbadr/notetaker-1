@@ -18,8 +18,7 @@ Note.create = function(user, obj, cb){
 };
 
 Note.list = function(userId, query, cb){
-  pg.query('select * from query_notes($1, $2, $3)', [userId, query.limit, query.offset], function(err, results){
-    //console.log(err, results);
+  pg.query('select * from query_notes($1, $2, $3, $4)', [userId, query.limit || 10, query.offset || 0, query.tag || '%'], function(err, results){
     cb(err, results && results.rows ? results.rows : null);
   });
 };
@@ -27,7 +26,6 @@ Note.list = function(userId, query, cb){
 Note.findOne = function(user, noteId, cb){
   console.log('NOTEID IN MODEL', noteId);
   pg.query('select * from query_note($1, $2)', [user.id, noteId], function(err, results){
-    //console.log(err, results);
     cb(err, results && results.rows ? results.rows : null);
   });
 };

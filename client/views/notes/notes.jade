@@ -10,10 +10,10 @@
           tbody
             tr(ng-repeat = 'note in notes')
               td: a(ui-sref='viewNote({noteId: note.note_id})') {{note.title}}
-              td {{note.created_at | date: medium}}
+              td {{note.updated_at | date: medium}}
               td
-                span.tag(ng-repeat='name in note.tag_names')
-                  a(href='/#/notes?tag={{name}}') {{name}},  
+                span.tag(ng-repeat='name in note.tags')
+                  a(ui-sref='notes({tag:name})') {{name}} 
   .small-4.columns 
     h1 New Note
     input(type='text', placeholder='Title', ng-model='newNote.title')
