@@ -38,28 +38,13 @@
       });
     };
 
-    /* OLD CREATE FUNCTION
-    $scope.create = function(){
-      $scope.upload = $upload.upload({
-        url: 'notes',
-        method: 'POST',
-        data: $scope.newNote,
-        file: files
-      }).progress(function(evt){
-        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-      }).success(function(data, status, headers, config){
-        console.log('data', data);
-        console.log('status', status);
-        console.log('headers', headers);
-        console.log('config', config);
-
-        Note.list().then(function(response){
-          $scope.newNote = {};
-          $scope.notes = response.data;
-        });
-      });
-    };
-    */
+    $scope.$on('upload', function(e, count){
+      $scope.count = count;
+      if($scope.count === $scope.files.length){
+        console.log('count trigger');
+        $state.reload();
+      }
+    });
 
   }]);
 })();
