@@ -11,7 +11,7 @@ module.exports = {
       noteId: Joi.number().required()
     }
   },
-  payload:{
+  payload: {
     maxBytes: 4194304, // 2^22 ; 4MB
     output:'stream',
     parse: true

@@ -20,12 +20,11 @@
 
     if($scope.mode === 'viewNote'){
       var noteId = $stateParams.noteId;
-      console.log('NOTEID is', noteId);
       Note.findOne(noteId).then(function(response){
         $scope.note = response.data[0];
       }, function(response){
         //reject promise
-        console.log('promise rejected', response);
+        console.log('something went wrong', response);
       });
     }
 

@@ -1,6 +1,12 @@
-h2 {{note.title}}
-h4 Created: {{note.created_at | date : 'medium'}}
-h5 {{note.body}}
+h1 {{note.title}}
+h6 Created: {{note.updated_at | date : 'medium'}}
 h6 Tags: 
-  span.tag(ng-repeat='name in note.tag_names')
-    a(href='/#/notes?tag={{name}}') {{name}}, 
+  span.tag(ng-repeat='name in note.tags')
+    a(href='/#/notes?tag={{name}}') {{name}},
+
+h6 Body:
+blockquote {{note.body}}
+h6 Photos: 
+ul.small-block-grid-3
+  li(ng-repeat='url in note.urls')
+    img.th(ng-src='{{url}}')

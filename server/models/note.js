@@ -24,9 +24,9 @@ Note.list = function(userId, query, cb){
   });
 };
 
-Note.findOne = function(noteId, cb){
+Note.findOne = function(user, noteId, cb){
   console.log('NOTEID IN MODEL', noteId);
-  pg.query('select * from query_note($1)', [noteId], function(err, results){
+  pg.query('select * from query_note($1, $2)', [user.id, noteId], function(err, results){
     //console.log(err, results);
     cb(err, results && results.rows ? results.rows : null);
   });
