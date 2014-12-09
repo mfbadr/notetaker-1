@@ -12,9 +12,12 @@
       files = f;
     };
 
-    if($scope.mode !== 'viewNote'){
+    if($scope.mode === 'notes'){
       Note.list($state.params.tag || '%', $state.params.page * 1 || 0).then(function(response){
+        console.log('got notes');
         $scope.notes = response.data;
+      }, function(response){
+        console.log('error getting notes');
       });
     }
 

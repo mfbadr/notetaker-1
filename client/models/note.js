@@ -10,8 +10,8 @@
       return $http.post('/notes', note);
     }
 
-    function list(){
-      return $http.get('/notes?limit=10&offset=0');
+    function list(tag, page){
+      return $http.get('/notes?limit=10&offset=' + 5 * page + '&tag=' + tag);
     }
 
     function findOne(noteId){
