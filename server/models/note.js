@@ -17,6 +17,12 @@ Note.create = function(user, obj, cb){
   });
 };
 
+Note.count = function(user, cb){
+  pg.query('select count(*) from notes where user_id = $1', [user.id], function(err, results){
+    cb(err, results && results.rows ? results.rows[0].count : null);
+  });
+};
+
 Note.list = function(userId, query, cb){
   pg.query('select * from query_notes($1, $2, $3, $4)', [userId, query.limit || 10, query.offset || 0, query.tag || '%'], function(err, results){
     cb(err, results && results.rows ? results.rows : null);

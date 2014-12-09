@@ -9,5 +9,6 @@ module.exports = [
   {method: 'post',   path: '/notes',                 config: require('../definitions/notes/create')},
   {method: 'get',    path: '/notes',                 config: require('../definitions/notes/list')},
   {method: 'post',   path: '/notes/{noteId}/upload', config: require('../definitions/notes/upload')},
-  {method: 'get',    path: '/notes/{noteId}',        config: require('../definitions/notes/one')}
+  {method: 'get',    path: '/notes/{noteId}',        config: require('../definitions/notes/one')},
+  {method: 'get',    path: '/notes/count',           config: require('../definitions/notes/count')}
 ];
