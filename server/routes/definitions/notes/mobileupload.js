@@ -13,7 +13,6 @@ module.exports = {
     }
   },
   handler: function(request, reply){
-    console.log('BEFORE UPLOAD PAYLOAD', request.payload);
     Note.mobileUpload(request.payload.noteId, request.payload.b64, request.auth.credentials, function(err){
       if(err){
         console.log('MOBILE UPLOAD ERROR', err);
